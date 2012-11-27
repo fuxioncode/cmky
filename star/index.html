@@ -1,0 +1,116 @@
+﻿<!doctype html>
+ 
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>星座</title>
+	<link rel="stylesheet" href="/css/themes/base/jquery-ui.css" />
+    <script src="/js/jquery-1.8.3.js"></script>
+    <script src="/js/jquery-ui.js"></script>
+    <style>
+    #draggable { width: 150px; height: 150px; padding: 0.5em; }
+	.star_select {width:150px}
+    </style>
+    <script>
+	var data=[{name:"随机"},
+		{name:"白羊座 ( Aries)"},{name:"金牛座 ( Taurus)"},{name:"双子座 ( Gemini)"},{name:"巨蟹座 ( Cancer)"}
+		,{name:"狮子座 ( Leo)"},{name:"处女座 ( Virgo)"},{name:"天秤座 ( Libra)"},{name:"天蝎座 ( Scorpius)"}
+		,{name:"人马座 ( Sagittarius)"},{name:"摩羯座 ( Capricornus)"},{name:"宝瓶座 ( Aquarius)"},{name:"双鱼座 ( Pisces)"}
+		];
+		
+	function update_option(obj,selected,avalid){
+		if(avalid==undefined) avalid={};
+		obj.html("");
+		for(var k in data){
+			if(selected==k || !avalid[k]){
+				var sd="";
+				if(selected==k){
+					sd="selected";
+				}
+				var option="<option value ='"+k+"' "+sd+">"+data[k].name+"</option>";
+				obj.append(option);
+			}
+		}
+	}
+	function get_selected(sel){
+		$(".star_select").each(function(){
+			var val=$(this).val();
+			if(val!=0){
+				sel[val]=true;
+			}
+		});
+	}
+	function select_change(){
+		var sel={};
+		get_selected(sel);
+		$(".star_select").each(function(){
+			update_option($(this),$(this).val(),sel);
+		});
+	};
+	function render_result(){
+		var sel={};
+		sel[0]=true;
+		get_selected(sel);
+		var rand=[];
+		for(var index in data){
+			if(sel[index]!=true){
+				rand.push(index);
+			}
+		}
+		rand.sort(function(a,b){return Math.random()-0.5;});
+		var result={};
+		var index=0;
+		$(".star_select").each(function(){
+			var val=$(this).val();
+			var name=$(this).attr("name");
+			if(val!=0){
+				result[parseInt(name)]=val;
+			}else{
+				result[parseInt(name)]=rand.pop();
+			}
+		});
+		var strResult="";
+		for(var index in result){
+			strResult+=index+":"+data[result[index]].name+";";
+		}
+
+		$("#result").val(strResult);
+	}
+	$(function() {
+		$("#render").click(render_result);
+		for(var index=1; index<=12; index++){
+			var select=$("<select name='"+index+"' class='star_select ui-widget-content ui-corner-all'></select>");
+			update_option(select,0);
+			select.change(select_change);
+			$("#star_select").append(select);
+			if(index%3==0)
+				$("#star_select").append("<br/>");
+		}
+	});
+    </script>
+</head>
+<body>
+<div >
+	<fieldset>
+	<label for="title">标题</label><input type="text" name="title" id="title" class="ui-widget-content ui-corner-all" /><br/>
+	<div id="star_select">
+
+	</div>
+	<input type="button" id="render" value="确定"/>
+	<textarea id="result"></textarea>
+	</fieldset>
+    <form>
+    <fieldset>
+        <label for="name">Name</label>
+        <input type="text" name="name" id="name" class="text ui-widget-content ui-corner-all" />
+        <label for="email">Email</label>
+        <input type="text" name="email" id="email" value="" class="text ui-widget-content ui-corner-all" />
+        <label for="password">Password</label>
+        <input type="password" name="password" id="password" value="" class="text ui-widget-content ui-corner-all" />
+    </fieldset>
+    </form>
+</div>
+
+ 
+</body>
+</html>
