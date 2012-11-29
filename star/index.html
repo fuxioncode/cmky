@@ -10,6 +10,7 @@
     <style>
     #draggable { width: 150px; height: 150px; padding: 0.5em; }
 	.star_select {width:150px}
+	#result{width:300px;height:185px}
     </style>
     <script>
 	var data=[{name:"随机"},
@@ -17,7 +18,7 @@
 		,{name:"狮子座 ( Leo)"},{name:"处女座 ( Virgo)"},{name:"天秤座 ( Libra)"},{name:"天蝎座 ( Scorpius)"}
 		,{name:"人马座 ( Sagittarius)"},{name:"摩羯座 ( Capricornus)"},{name:"宝瓶座 ( Aquarius)"},{name:"双鱼座 ( Pisces)"}
 		];
-		
+	var range=["第一名(冠军)","第二名(亚军)","第三名(季军)","第四名","第五名","第六名","第七名","第八名","第九名","第十名","第十一名","第十二名"];
 	function update_option(obj,selected,avalid){
 		if(avalid==undefined) avalid={};
 		obj.html("");
@@ -69,9 +70,9 @@
 				result[parseInt(name)]=rand.pop();
 			}
 		});
-		var strResult="";
+		var strResult=$("#title").val()+":";
 		for(var index in result){
-			strResult+=index+":"+data[result[index]].name+";";
+			strResult+=range[index-1]+":"+data[result[index]].name+";";
 		}
 
 		$("#result").val(strResult);
@@ -92,23 +93,12 @@
 <body>
 <div >
 	<fieldset>
-	<label for="title">标题</label><input type="text" name="title" id="title" class="ui-widget-content ui-corner-all" /><br/>
+	<label for="title">标题</label><input type="text" name="title" id="title" class="ui-widget-content ui-corner-all" value="最无聊程序猿星座排名" /><br/>
 	<div id="star_select">
-
 	</div>
-	<input type="button" id="render" value="确定"/>
+	<input type="button" id="render" value="确定"/><br>
 	<textarea id="result"></textarea>
 	</fieldset>
-    <form>
-    <fieldset>
-        <label for="name">Name</label>
-        <input type="text" name="name" id="name" class="text ui-widget-content ui-corner-all" />
-        <label for="email">Email</label>
-        <input type="text" name="email" id="email" value="" class="text ui-widget-content ui-corner-all" />
-        <label for="password">Password</label>
-        <input type="password" name="password" id="password" value="" class="text ui-widget-content ui-corner-all" />
-    </fieldset>
-    </form>
 </div>
 
  
