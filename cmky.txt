@@ -31,4 +31,31 @@ F(x,y)=解决方案+代码
 	网络通讯
 	解析http头
 	创建线程
+
 	
+	
+数据库部署方案：
+codebook表： 里面存储各种解决方案。
+language表： 语言列表
+problem表：  存问题列表
+index表：    用于表述codebook、problem、language之间的关系
+modify_history表: 修改历史表，用户和其修改内容
+codebook 有
+	id、		编号
+	title、		标题
+	describe、	描述
+	code、		代码
+	update_time、修改时间
+	
+language表
+	id			编号
+	name		名字
+
+problem表
+	id			id
+	title		标题
+	describe	描述
+	update_time	更新时间
+	index_time	关联索引更新时间
+
+
