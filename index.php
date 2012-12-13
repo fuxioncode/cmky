@@ -1,4 +1,4 @@
-<?php
+﻿<?php
  /**
  * Example Application
 
@@ -6,11 +6,14 @@
  */
 
 require('third/smarty/Smarty.class.php');
-
+require("db.php");
 $smarty = new Smarty;
 //smarty setting
 //$smarty->force_compile = true;
-$smarty->debugging = true;
+$debug=$_GET["st_debug"];
+if($debug=="true")
+	$smarty->debugging = true;
+
 $smarty->caching = true;
 $smarty->cache_lifetime = 20;
 $subdir="third". DS."smarty";
@@ -18,10 +21,13 @@ $smarty->setCompileDir($subdir . DS.'templates_c' . DS)
 	->setCacheDir($subdir . DS.'cache' . DS);
 	
 //project setting
-$project=$_GET["project"];
+$project=$_GET["st_project"];
 if($project=="")
 	$project="test";
 $smarty->addTemplateDir( ".". DS . $project . DS.'templates'. DS)
 	->setConfigDir(".". DS . $project . DS.'configs' . DS);
-include_once($project."/index.php");
+$file=$_GET["st_file"];
+if($file=="")
+	$file="index";
+include_once($project."/$file.php");
 ?>
