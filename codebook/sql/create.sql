@@ -24,6 +24,7 @@ CREATE TABLE IF NOT EXISTS `t_codebook` (
   `title` varchar(255) NOT NULL,
   `describe` text NOT NULL,
   `code` text NOT NULL,
+  `language` unsigned NOT NULL,
   `update_time` datetime NOT NULL,
   PRIMARY KEY (`id`),
   KEY `language` (`title`,`update_time`)
@@ -69,6 +70,16 @@ CREATE TABLE IF NOT EXISTS `t_problem` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `title` varchar(255) NOT NULL,
   `describe` text NOT NULL,
+  `update_time` datetime NOT NULL,
+  `index_time` datetime NOT NULL,
   PRIMARY KEY (`id`),
   KEY `title` (`title`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
+
+
+CREATE TABLE  `codebook`.`t_user` (
+`id` INT( 20 ) NOT NULL AUTO_INCREMENT COMMENT  'userid',
+`username` VARCHAR( 64 ) NOT NULL ,
+`passwd` VARCHAR( 64 ) NOT NULL ,
+PRIMARY KEY (  `id` ,  `username` )
+) ENGINE = MYISAM COMMENT =  '登陆用户名和密码';
