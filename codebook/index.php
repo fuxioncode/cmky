@@ -7,13 +7,8 @@
 $smarty->caching = false;
 $template="index.tpl";
 if(!$smarty->isCached("index.tpl")) {
-	try {
-		$DB = new PDO("mysql:dbname=codebook;host=127.0.0.1", "root", "");
-	} catch (PDOException $e) {
-        throw new SmartyException('Mysql Resource failed: ' . $e->getMessage());
-    }
-	$fetch=$DB->prepare('SELECT problem_id,language_id,codebook_id,t_problem.title as ptitle,t_language.name,t_codebook.title as ctitle FROM `t_problem`,`t_index`,t_language,t_codebook WHERE t_problem.id=t_index.problem_id and t_index.language_id=t_language.id and t_index.codebook_id=t_codebook.id order by t_index.update_time desc');
-	$fetch->execute();
+	$DB = new Mysql("codebook");
+	$fetch=$DB->query('SELECT problem_id,language_id,codebook_id,t_problem.title as ptitle,t_language.name,t_codebook.title as ctitle FROM `t_problem`,`t_index`,t_language,t_codebook WHERE t_problem.id=t_index.problem_id and t_index.language_id=t_language.id and t_index.codebook_id=t_codebook.id order by t_index.update_time desc',null);
 	$row=null;
 	$data=array();
 	$title=array();
@@ -37,8 +32,7 @@ if(!$smarty->isCached("index.tpl")) {
 	$fetch->closeCursor();   
 
 	//$language=array(1=>"java",2=>"c++",3=>"c",4=>"javascript",5=>"lua",6=>"php",7=>"python");
-	$fetch=$DB->prepare('SELECT * FROM `t_language`');
-	$fetch->execute();
+	$fetch=$DB->query('SELECT * FROM `t_language`',null);
 	$language=array();
 	while($row=$fetch->fetch()){
 		$id=$row["id"];
