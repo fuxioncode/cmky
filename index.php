@@ -26,8 +26,16 @@ if($project=="")
 	$project="codebook";
 $smarty->addTemplateDir( ".". DS . $project . DS.'templates'. DS)
 	->setConfigDir(".". DS . $project . DS.'configs' . DS);
+
 $file=$_GET["st_file"];
 if($file=="")
 	$file="index";
+
+$st_message="";
+if(!file_exists($project."/$file.php"))
+{
+	$smarty->assign("st_message","文件 $project $file 不存在");
+	$file="index";
+}
 include_once($project."/$file.php");
 ?>
