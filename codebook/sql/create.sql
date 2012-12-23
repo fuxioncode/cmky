@@ -1,22 +1,22 @@
--- phpMyAdmin SQL Dump
+ï»¿-- phpMyAdmin SQL Dump
 -- version 2.11.9.2
 -- http://www.phpmyadmin.net
 --
--- Ö÷»ú: 127.0.0.1:3306
--- Éú³ÉÈÕÆÚ: 2012 Äê 12 ÔÂ 13 ÈÕ 13:02
--- ·şÎñÆ÷°æ±¾: 5.1.28
--- PHP °æ±¾: 5.2.6
+-- ä¸»æœº: 127.0.0.1:3306
+-- ç”Ÿæˆæ—¥æœŸ: 2012 å¹´ 12 æœˆ 13 æ—¥ 13:02
+-- æœåŠ¡å™¨ç‰ˆæœ¬: 5.1.28
+-- PHP ç‰ˆæœ¬: 5.2.6
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 
 --
--- Êı¾İ¿â: `codebook`
+-- æ•°æ®åº“: `codebook`
 --
 
 -- --------------------------------------------------------
-
+use codebook
 --
--- ±íµÄ½á¹¹ `t_codebook`
+-- è¡¨çš„ç»“æ„ `t_codebook`
 --
 
 CREATE TABLE IF NOT EXISTS `t_codebook` (
@@ -24,7 +24,7 @@ CREATE TABLE IF NOT EXISTS `t_codebook` (
   `title` varchar(255) NOT NULL,
   `describe` text NOT NULL,
   `code` text NOT NULL,
-  `language` unsigned NOT NULL,
+  `language` int(10) unsigned NOT NULL,
   `update_time` datetime NOT NULL,
   PRIMARY KEY (`id`),
   KEY `language` (`title`,`update_time`)
@@ -33,7 +33,7 @@ CREATE TABLE IF NOT EXISTS `t_codebook` (
 -- --------------------------------------------------------
 
 --
--- ±íµÄ½á¹¹ `t_index`
+-- è¡¨çš„ç»“æ„ `t_index`
 --
 
 CREATE TABLE IF NOT EXISTS `t_index` (
@@ -50,7 +50,7 @@ CREATE TABLE IF NOT EXISTS `t_index` (
 -- --------------------------------------------------------
 
 --
--- ±íµÄ½á¹¹ `t_language`
+-- è¡¨çš„ç»“æ„ `t_language`
 --
 
 CREATE TABLE IF NOT EXISTS `t_language` (
@@ -63,7 +63,7 @@ CREATE TABLE IF NOT EXISTS `t_language` (
 -- --------------------------------------------------------
 
 --
--- ±íµÄ½á¹¹ `t_problem`
+-- è¡¨çš„ç»“æ„ `t_problem`
 --
 
 CREATE TABLE IF NOT EXISTS `t_problem` (
@@ -82,4 +82,4 @@ CREATE TABLE  `codebook`.`t_user` (
 `username` VARCHAR( 64 ) NOT NULL ,
 `passwd` VARCHAR( 64 ) NOT NULL ,
 PRIMARY KEY (  `id` ,  `username` )
-) ENGINE = MYISAM COMMENT =  'µÇÂ½ÓÃ»§ÃûºÍÃÜÂë';
+) ENGINE = MYISAM COMMENT =  'ç™»é™†ç”¨æˆ·åå’Œå¯†ç ';
