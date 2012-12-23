@@ -23,7 +23,7 @@ $smarty->setCompileDir($subdir . DS.'templates_c' . DS)
 //project setting
 $project=$_GET["st_project"];
 if($project=="")
-	$project="test";
+	$project="codebook";
 $smarty->addTemplateDir( ".". DS . $project . DS.'templates'. DS)
 	->setConfigDir(".". DS . $project . DS.'configs' . DS);
 $file=$_GET["st_file"];
