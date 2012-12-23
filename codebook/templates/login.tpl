@@ -3,9 +3,13 @@ $(function(){
 	$("#bt_login").click(function(){
 		$("#login_form").show();
 	});
+	
+	$("#bt_login_close").click(function(){
+		$("#login_form").hide();
+	});
 });
 </script>	
-    <style type="text/css">
+<style type="text/css">
       .form-signin {
         max-width: 300px;
         padding: 19px 29px 29px;
@@ -30,12 +34,12 @@ $(function(){
         margin-bottom: 15px;
         padding: 7px 9px;
       }
-
     </style>
-    <div id="login_form"  class="container navbar navbar-inverse navbar-fixed-top pull-right" style="display:none;">
+
+    <div id="login_form" class="container navbar navbar-inverse navbar-fixed-top pull-right" style="display:none;">
 
       <form class="form-signin">
-		<p align="right"> <a href="#" class="icon-remove-sign"></a></p>
+		<p align="right"> <a id="bt_login_close" class="icon-remove-sign"></a></p>
         <h2 class="form-signin-heading">Please sign in</h2>
         <input type="text" class="input-block-level" placeholder="Email address">
         <input type="password" class="input-block-level" placeholder="Password">
