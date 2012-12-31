@@ -1,11 +1,18 @@
-<script>
+﻿<script>
 $(function(){
 	$("#bt_login").click(function(){
-		$("#login_form").show();
+		$("#login_form").fadeIn();
 	});
 	
 	$("#bt_login_close").click(function(){
-		$("#login_form").hide();
+		$("#login_form").fadeOut();
+	});
+	$("#login_submit").click(function(){
+		$.post("/ser/codebook/login_check",{ username:$("#login_username").val(),password:$("#login_password").val()},function(data){
+			$("#login_message").fadeIn();
+			$("#login_message").html(data.username+":"+data.message);
+			$("#login_message").fadeOut(5000);
+		},"json");
 	});
 });
 </script>	
@@ -34,19 +41,21 @@ $(function(){
         margin-bottom: 15px;
         padding: 7px 9px;
       }
+	#login_form{
+		height:0px
+	}
     </style>
 
-    <div id="login_form" class="container navbar navbar-inverse navbar-fixed-top pull-right" style="display:none;">
-
-      <form class="form-signin">
-		<p align="right"> <a id="bt_login_close" class="icon-remove-sign"></a></p>
-        <h2 class="form-signin-heading">Please sign in</h2>
-        <input type="text" class="input-block-level" placeholder="Email address">
-        <input type="password" class="input-block-level" placeholder="Password">
+    <div id="login_form" class="navbar navbar-inverse navbar-fixed-top">
+      <form class="form-signin pull-right" style="margin-right:100px">
+		<p align="right"> <a id="bt_login_close" class="icon-remove-sign" style="cursor: pointer;"></a></p>
+        <h2 class="form-signin-heading">请登录</h2><span id="login_message"></span>
+        <input type="text" id="login_username" class="input-block-level" placeholder="用户名">
+        <input type="password" id="login_password" class="input-block-level" placeholder="密码">
         <label class="checkbox">
-          <input type="checkbox" value="remember-me"> Remember me
+          <input type="checkbox" value="remember-me"> 记住账号
         </label>
-        <button class="btn btn-large btn-primary" type="submit">Sign in</button>
+        <a class="btn btn-large btn-primary" id="login_submit" >登录</a>
       </form>
 
     </div> <!-- /container -->
